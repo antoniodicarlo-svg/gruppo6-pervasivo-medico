@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formati di interscambio</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; background-color: #fafafa; }
+        h1 { color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+        h2 { color: #2b6cb0; margin-top: 30px; }
+        h3 { color: #4a5568; }
+        p { text-align: justify; }
+        pre { background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 6px; overflow-x: auto; box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); }
+        table { width: 100%; border-collapse: collapse; margin: 30px 0; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden; }
+        th, td { border: 1px solid #e2e8f0; padding: 12px 15px; text-align: left; }
+        th { background-color: #ebf8ff; color: #2b6cb0; font-weight: bold; }
+        tr:nth-child(even) { background-color: #f7fafc; }
+        .highlight { font-weight: 600; color: #2d3748; }
+    </style>
+</head>
+<body>
+
+    <h1>Formati di interscambio dati nei Sistemi Distribuiti</h1>
+    <p>Nelle architetture distribuite, l'interscambio di informazioni tra sistemi eterogenei richiede l'adozione di formati standardizzati. Questi formati garantiscono l'interoperabilità, indipendentemente dal linguaggio di programmazione, dal sistema operativo o dall'hardware utilizzato dai singoli nodi della rete.</p>
+
+    <!-- Sezione CSV -->
+    <h2>1. CSV (Comma-Separated Values)</h2>
+    <p><span class="highlight">Caratteristiche:</span> Il CSV è un formato testuale estremamente semplice e compatto, utilizzato principalmente per rappresentare dati in forma tabellare (strutture a righe e colonne).</p>
+    <p><span class="highlight">Peculiarità:</span> Non supporta gerarchie, nidificazioni o metadati complessi. Ogni riga del file corrisponde a un record, e i singoli campi sono separati da un carattere delimitatore (solitamente una virgola o un punto e virgola). L'assenza di overhead lo rende ideale per il trasferimento di grandissimi volumi di dati strutturati in modo piatto.</p>
+    <h3>Esempio di codice CSV:</h3>
+    <pre>id,nome,ruolo,attivo
+1,Utente Alfa,Developer,true
+2,Utente Beta,Designer,false</pre>
+
+    <!-- Sezione XML -->
+    <h2>2. XML (eXtensible Markup Language)</h2>
+    <p><span class="highlight">Caratteristiche:</span> L'XML è un linguaggio di marcatura estendibile, strutturato gerarchicamente mediante l'uso di tag definiti dall'utente. È orientato sia ai documenti che ai dati.</p>
+    <p><span class="highlight">Peculiarità:</span> Offre una formidabile capacità di validazione nativa tramite schemi rigidi (DTD o XSD) e supporta la definizione di metadati complessi e attributi. Di contro, risulta estremamente verboso: la ripetizione costante dei tag di apertura e chiusura aumenta notevolmente la dimensione dei file e l'overhead di computazione durante il parsing.</p>
+    <h3>Esempio di codice XML:</h3>
+    <pre>&lt;utenti&gt;
+    &lt;utente id="1"&gt;
+        &lt;nome&gt;Utente Alfa&lt;/nome&gt;
+        &lt;ruolo&gt;Developer&lt;/ruolo&gt;
+        &lt;attivo&gt;true&lt;/attivo&gt;
+    &lt;/utente&gt;
+    &lt;utente id="2"&gt;
+        &lt;nome&gt;Utente Beta&lt;/nome&gt;
+        &lt;ruolo&gt;Designer&lt;/ruolo&gt;
+        &lt;attivo&gt;false&lt;/attivo&gt;
+    &lt;/utente&gt;
+&lt;/utenti&gt;</pre>
+
+    <!-- Sezione JSON -->
+    <h2>3. JSON (JavaScript Object Notation)</h2>
+    <p><span class="highlight">Caratteristiche:</span> Il JSON è un formato leggero basato sul testo e strutturato in coppie chiave-valore e array ordinati. Sebbene derivi dalla sintassi degli oggetti JavaScript, è completamente indipendente dal linguaggio.</p>
+    <p><span class="highlight">Peculiarità:</span> Rappresenta lo standard di fatto per le moderne API REST e le applicazioni web. Offre un perfetto bilanciamento tra leggibilità per gli umani e velocità di parsing per le macchine. Consente strutture dati complesse e nidificate senza l'overhead sintattico tipico dell'XML.</p>
+    <h3>Esempio di codice JSON:</h3>
+    <pre>[
+  {
+    "id": 1,
+    "nome": "Utente Alfa",
+    "ruolo": "Developer",
+    "attivo": true
+  },
+  {
+    "id": 2,
+    "nome": "Utente Beta",
+    "ruolo": "Designer",
+    "attivo": false
+  }
+]</pre>
+
+    <!-- Sezione Conclusiva di Confronto -->
+    <h2>4. Confronto Comparativo</h2>
+    <p>La scelta del formato dipende strettamente dai requisiti del sistema distribuito in termini di performance, complessità dei dati e interoperabilità enterprise.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Criterio</th>
+                <th>CSV</th>
+                <th>XML</th>
+                <th>JSON</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="highlight">Struttura Dati</span></td>
+                <td>Piatta / Tabellare</td>
+                <td>Gerarchica / Nidificata</td>
+                <td>Gerarchica / Nidificata</td>
+            </tr>
+            <tr>
+                <td><span class="highlight">Leggibilità Umana</span></td>
+                <td>Alta per piccoli dataset, complessa se estesa</td>
+                <td>Media (molto verboso)</td>
+                <td>Alta e intuitiva</td>
+            </tr>
+            <tr>
+                <td><span class="highlight">Peso del File</span></td>
+                <td>Minimo (nessun overhead)</td>
+                <td>Massimo (tag ridondanti)</td>
+                <td>Ridotto (ottimizzato)</td>
+            </tr>
+            <tr>
+                <td><span class="highlight">Validazione Strutturale</span></td>
+                <td>Assente nativamente</td>
+                <td>Forte e nativa (XSD/DTD)</td>
+                <td>Supportata (JSON Schema)</td>
+            </tr>
+            <tr>
+                <td><span class="highlight">Contesto d'Uso Ideale</span></td>
+                <td>Data Warehousing e flussi Bulk</td>
+                <td>Sistemi Legacy, Enterprise e Configurazione</td>
+                <td>API Web, Servizi REST e Microservizi</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
